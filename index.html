@@ -16,7 +16,7 @@
         var file_input = $('#file-input');
         var file = file_input[0].files[0];
 
-        // https://exiftool.org/TagNames/EXIF.html
+        // Tagを追加 https://exiftool.org/TagNames/EXIF.html
         EXIF.Tags[0xA433]="LensMake";
         EXIF.Tags[0xA434]="LensModel";
         EXIF.Tags[0x920a]="Focallength";
@@ -24,6 +24,7 @@
         EXIF.Tags[0x8825]="GPS"; // https://exiftool.org/TagNames/GPS.html
         // EXIF.getDataでexif情報を解析
         EXIF.getData(file, function() {
+          // 測光モードを日本語に変換
           function MeteringModeString(n){
             switch (n){
               case 0:
@@ -71,7 +72,6 @@
           result += '<br>';
           result += '測光モード: ' + MeteringModeString(EXIF.getTag(this,'MeteringModeOriginal'));
           result += '<br>';
-          console.log(EXIF.getTag(this,'GPS'))
           result += 'GPSInfo: ' + EXIF.getTag(this,'GPS');
           $('#result').html(result);
         });
