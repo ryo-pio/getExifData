@@ -15,6 +15,9 @@
       $('#test').on('click', function() {
         var file_input = $('#file-input');
         var file = file_input[0].files[0];
+
+        EXIF.Tags[0xA433]="LensMake"; // tagを追加
+        EXIF.Tags[0xA434]="LensModel"; // tagを追加
         // EXIF.getDataでexif情報を解析
         EXIF.getData(file, function() {
           var result = '';
@@ -26,13 +29,15 @@
           result += '<br>';
           result += 'F値: ' + EXIF.getTag(this,'FNumber');
           result += '<br>';
-          result += 'シャッター速度: ' + EXIF.getTag(this,'ExposureTime');
+          result += 'シャッター速度: 1/' + 1/EXIF.getTag(this,'ExposureTime');
           result += '<br>';
           result += 'ホワイトバランス: ' + EXIF.getTag(this,'WhiteBalance');
           result += '<br>';
           result += '向きの修正(orientation): ' + EXIF.getTag(this, "Orientation");
           result += '<br>';
           result += 'カメラ機種: ' + EXIF.getTag(this,'Model');
+          result += '<br>';
+          result += 'レンズ: ' + EXIF.getTag(this,'LensModel');
           result += '<br>';
           result += 'フラッシュ: ' + EXIF.getTag(this,'Flash');
           $('#result').html(result);
