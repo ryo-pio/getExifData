@@ -84,14 +84,23 @@
           $('#result').html(result);
         });
       });
-      function copyToClipboard(){
-        var copyTarget = document.getElementById("result");
-        copyTarget.select();
-        document.execCommand("Copy");
-        alert("クリップボードにコピーしました！");
-      };
-      document.getElementById("copy").onclick = function() {
-        copyToClipboard();
+      //If you want to copyText from Element
+      function copyTextFromElement(elementID) {
+        let element = document.getElementById(elementID); //select the element
+        let elementText = element.textContent; //get the text content from the element
+        copyText(elementText); //use the copyText function below
+      }
+      //If you only want to put some Text in the Clipboard just use this function
+      // and pass the string to copied as the argument.
+      function copyText(text) {
+        if (!navigator.clipboard.writeText(text)) {
+          alert("コピーに失敗しました。");
+        } else {
+          alert("コピーしました！");
+        }
+      }
+      document.getElementById("copy-btn").onclick = function() {
+        copyTextFromElement("result");
       };
     });
   </script>
@@ -101,10 +110,10 @@
     <h3 class="content__title">EXIF情報取得</h3>
     <div class="content__field space">
       <input id="file-input" type="file" />
-      <input type="button" id="test" value="実行" class="btn btn-primary input-space" />
+      <input type="button" id="test" value="実行" class="btn btn-success input-space" />
     </div>
     <div id="result" class="content__result space"></div>
-    <button class="btn btn-primary" id="copy">Copy</button>
+    <button class="btn btn-primary" id="copy-btn">Copy</button>
     <div class="content__text space">orientationの説明(外部リンク)</div>
     <a href="http://dqn.sakusakutto.jp/2009/02/jpegexiforientaion.html" target="_blank">こちら</a>
   </div>
