@@ -84,6 +84,15 @@
           $('#result').html(result);
         });
       });
+      function copyToClipboard(){
+        var copyTarget = document.getElementById("result");
+        copyTarget.select();
+        document.execCommand("Copy");
+        alert("クリップボードにコピーしました！");
+      };
+      document.getElementById("copy").onclick = function() {
+        copyToClipboard();
+      };
     });
   </script>
 </head>
@@ -95,6 +104,7 @@
       <input type="button" id="test" value="実行" class="btn btn-primary input-space" />
     </div>
     <div id="result" class="content__result space"></div>
+    <button class="btn btn-primary" id="copy">Copy</button>
     <div class="content__text space">orientationの説明(外部リンク)</div>
     <a href="http://dqn.sakusakutto.jp/2009/02/jpegexiforientaion.html" target="_blank">こちら</a>
   </div>
