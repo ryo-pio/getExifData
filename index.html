@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EXIF情報取得</title>
+  <link rel='stylesheet' href='https://unpkg.com/ress/dist/ress.min.css'>
+  <link rel='stylesheet' href='src/style/bootstrap.css'>
+  <link rel='stylesheet' href='src/style/style.css'>
+  <script type="text/javascript" src="src/javascript/bootstrap.js"></script>
+  <script type="text/javascript" src="src/javascript/jquery-3.5.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.2.1/exif.min.js"></script>
+  <script type='text/javascript'>
+    $(function() {
+      $('#test').on('click', function() {
+        var file_input = $('#file-input');
+        var file = file_input[0].files[0];
+        // EXIF.getDataでexif情報を解析
+        EXIF.getData(file, function() {
+          var result = '';
+          // EXIF.getTag(this, "[exifのタグ名]")で、値を取得
+          // https://github.com/exif-js/exif-js
+          result += '撮影時間: ' + EXIF.getTag(this, "DateTimeOriginal");
+          result += '<br>';
+          result += 'ISO感度: ' + EXIF.getTag(this,'ISOSpeedRatings');
+          result += '<br>';
+          result += 'F値: ' + EXIF.getTag(this,'FNumber');
+          result += '<br>';
+          result += 'シャッター速度: ' + EXIF.getTag(this,'ExposureTime');
+          result += '<br>';
+          result += 'ホワイトバランス: ' + EXIF.getTag(this,'WhiteBalance');
+          result += '<br>';
+          result += '向きの修正(orientation): ' + EXIF.getTag(this, "Orientation");
+          result += '<br>';
+          result += 'カメラ機種: ' + EXIF.getTag(this,'Model');
+          result += '<br>';
+          result += 'フラッシュ: ' + EXIF.getTag(this,'Flash');
+          $('#result').html(result);
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="content">
+    <h3 class="content__title">EXIF情報取得</h3>
+    <div class="content__field space">
+      <input id="file-input" type="file" />
+      <input type="button" id="test" value="実行" class="btn btn-success input-space" />
+    </div>
+    <div id="result" class="content__result space"></div>
+    <div class="content__text space">orientationの説明(外部リンク)</div>
+    <a href="http://dqn.sakusakutto.jp/2009/02/jpegexiforientaion.html" target="_blank">こちら</a>
+  </div>
+</body>
+</html>

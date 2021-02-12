@@ -1,0 +1,16 @@
+.content {
+  padding: 10px 20px;
+}
+
+.content .space {
+  margin-top: 30px;
+}
+
+.content .input-space {
+  margin-top: 10px;
+}
+
+.content__result {
+  line-height: 30px;
+}
+/*# sourceMappingURL=style.css.map */
