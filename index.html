@@ -24,8 +24,7 @@
         EXIF.Tags[0x8825]="GPS"; // https://exiftool.org/TagNames/GPS.html
         // EXIF.getDataでexif情報を解析
         EXIF.getData(file, function() {
-          // 測光モードを日本語に変換
-          function MeteringModeString(n){
+          function MeteringModeString(n){ // 測光モードを日本語に変換
             switch (n){
               case 0:
                 return "undefind"
@@ -47,16 +46,21 @@
                 return "error"
             }
           }
+          function ChangeExposureTime(n){ // シャッター速度表示変換
+            if(n < 1){
+              return "1/" + 1/n
+            } else {
+              return n
+            }
+          }
           var result = '';
           // EXIF.getTag(this, "[exifのタグ名]")で、値を取得
           // https://github.com/exif-js/exif-js
-          result += '撮影時間: ' + EXIF.getTag(this, "DateTimeOriginal");
-          result += '<br>';
           result += 'ISO感度: ' + EXIF.getTag(this,'ISOSpeedRatings');
           result += '<br>';
           result += 'F値: ' + EXIF.getTag(this,'FNumber');
           result += '<br>';
-          result += 'シャッター速度: 1/' + 1/EXIF.getTag(this,'ExposureTime');
+          result += 'シャッター速度: ' + ChangeExposureTime(EXIF.getTag(this,'ExposureTime'));
           result += '<br>';
           result += 'ホワイトバランス: ' + EXIF.getTag(this,'WhiteBalance');
           result += '<br>';
@@ -73,6 +77,8 @@
           result += '測光モード: ' + MeteringModeString(EXIF.getTag(this,'MeteringModeOriginal'));
           result += '<br>';
           result += 'GPSInfo: ' + EXIF.getTag(this,'GPS');
+          result += '<br>';
+          result += '撮影時間: ' + EXIF.getTag(this, "DateTimeOriginal");
           $('#result').html(result);
         });
       });
