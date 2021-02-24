@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>必要距離計算</title>
+  <link rel='stylesheet' href='https://unpkg.com/ress/dist/ress.min.css'>
+  <link rel='stylesheet' href='src/style/bootstrap.css'>
+  <link rel='stylesheet' href='src/style/style.css'>
+  <script type="text/javascript" src="src/javascript/bootstrap.js"></script>
+  <script type="text/javascript" src="src/javascript/jquery-3.5.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.2.1/exif.min.js"></script>
+  <script type='text/javascript'>
+    $(function(){
+      $('#far-btn').on('click', function() {
+        const focal_length = document.getElementById("focal_length").value;
+        const image_sensor = document.getElementById("image_sensor").value;
+        const subject_height = document.getElementById("subject_height").value;
+        const hoge = Number(focal_length) * Number(subject_height) / Number(image_sensor);
+        $('#far-result').html(hoge);
+      });
+    });
+  </script>
+</head>
+<body>
+  <!-- https://keisan.casio.jp/exec/system/1209002710 -->
+  <div class="content">
+    <div class="content__far">
+      <label>焦点距離(mm)</label>
+      <input id="focal_length"></input>
+      <label>イメージセンサー(mm)</label>
+      <input id="image_sensor"></input>
+      <label>被写体の高さ(m)</label>
+      <input id="subject_height"></input>
+      <button class="btn btn-primary" id="far-btn">計算する</button>
+      <label>必要距離</label>
+      <div id="far-result"></div>
+    </div>
+    <a href="index.html">戻る</a>
+  </div>
+</body>
+</html>

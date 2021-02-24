@@ -9,4 +9,8 @@
   &__result {
     line-height: 25px;
   }
+  &__far {
+    display: flex;
+    flex-direction: column;
+  }
 }
