@@ -35,3 +35,19 @@
     }
   }
 }
+@media screen and (max-width:480px) {
+  .content {
+    .radio-btn {
+      margin: 0;
+    }
+    &__far {
+      &--field {
+        flex-direction: column;
+        label, select, input {
+          min-width: auto;
+          width: auto;
+        }
+      }
+    }
+  }
+}
