@@ -13,30 +13,70 @@
   <script type='text/javascript'>
     $(function(){
       $('#far-btn').on('click', function() {
-        const focal_length = document.getElementById("focal_length").value;
-        const image_sensor = document.getElementById("image_sensor").value;
-        const subject_height = document.getElementById("subject_height").value;
-        const hoge = Number(focal_length) * Number(subject_height) / Number(image_sensor);
-        $('#far-result').html(hoge);
+        const focalLength = document.getElementById("focal_length").value;
+        const subjectHeight = document.getElementById("subject_height").value;
+        const radioBtnValue = document.getElementById("image_sensor").image_sensor.value;
+        const cameraModel = document.getElementById("camera-model").value;
+        let imageSensor = 0;
+        switch (cameraModel){
+          case "35mm-full":
+            if (radioBtnValue == "0") {
+              imageSensor = 36;
+              console.log("hosssssss")
+            } else if (radioBtnValue == "1") {
+              imageSensor = 24;
+            }
+            break;
+          case "apsc":
+            if (radioBtnValue == "0") {
+              imageSensor = 23.4;
+            } else if (radioBtnValue == "1") {
+              imageSensor = 16.7;
+            }
+            break;
+          default:
+            imageSensor = 0;
+        }
+        const result = '<div class="red">' + Number(focalLength) * Number(subjectHeight) / imageSensor + '</div>';
+        $('#far-result').html(result);
       });
     });
   </script>
 </head>
 <body>
-  <!-- https://keisan.casio.jp/exec/system/1209002710 -->
+  <!-- 計算参考サイトhttps://keisan.casio.jp/exec/system/1209002710 -->
   <div class="content">
     <div class="content__far">
-      <label>焦点距離(mm)</label>
-      <input id="focal_length"></input>
-      <label>イメージセンサー(mm)</label>
-      <input id="image_sensor"></input>
-      <label>被写体の高さ(m)</label>
-      <input id="subject_height"></input>
-      <button class="btn btn-primary" id="far-btn">計算する</button>
-      <label>必要距離</label>
-      <div id="far-result"></div>
+      <div class="content__far--field">
+        <label>焦点距離 (mm)</label>
+        <input id="focal_length"></input>
+      </div>
+      <div class="content__far--field input-space">
+        <label>イメージセンサー (mm)</label>
+        <select id="camera-model">
+          <option value="35mm-full">35mmフルサイズ</option>
+          <option value="apsc">APS-C</option>
+        </select>
+      </div>
+      <div class="content__far--field input-space">
+        <form id="image_sensor" class="radio-btn">
+          <input name="image_sensor" type="radio" value="0">縦で撮影
+          <input name="image_sensor" type="radio" value="1">横(水平)で撮影
+        </form>
+      </div>
+      <div class="content__far--field input-space">
+        <label>被写体の高さ (m)</label>
+        <input id="subject_height"></input>
+      </div>
+      <div class="content__far--field input-space">
+        <button class="btn btn-primary" id="far-btn">計算する</button>
+      </div>
+      <div class="content__far--field space">
+        <label>必要距離 (m)</label>
+        <div id="far-result"></div>
+      </div>
     </div>
-    <a href="index.html">戻る</a>
+    <a href="index.html" class="space">戻る</a>
   </div>
 </body>
 </html>

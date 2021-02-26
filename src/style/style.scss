@@ -6,11 +6,32 @@
   .input-space {
     margin-top: 10px;
   }
+  .radio-btn {
+    margin-left: 200px;
+    input {
+      width: auto;
+    }
+  }
+  .red {
+    color: red;
+  }
   &__result {
     line-height: 25px;
   }
   &__far {
     display: flex;
     flex-direction: column;
+    &--field {
+      display: flex;
+      flex-direction: row;
+      label {
+        min-width: 200px;
+      }
+      input, select {
+        border: 1px solid gray;
+        border-radius: 5px;
+        width: 200px;
+      }
+    }
   }
 }

@@ -10,6 +10,18 @@
   margin-top: 10px;
 }
 
+.content .radio-btn {
+  margin-left: 200px;
+}
+
+.content .radio-btn input {
+  width: auto;
+}
+
+.content .red {
+  color: red;
+}
+
 .content__result {
   line-height: 25px;
 }
@@ -22,5 +34,25 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.content__far--field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.content__far--field label {
+  min-width: 200px;
+}
+
+.content__far--field input, .content__far--field select {
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 200px;
 }
 /*# sourceMappingURL=style.css.map */
